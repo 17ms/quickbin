@@ -1,0 +1,13 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.swp
+
+server/dist/**/*
+server/yarn.lock
+server/node_modules

@@ -1,0 +1,3 @@
+# quickbin
+Minimalistic ghostbin clone
+
