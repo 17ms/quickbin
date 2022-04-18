@@ -13,6 +13,14 @@ class PostDAO {
 
     return id
   }
+
+  async getPost(id: string): Promise<[string, string]> {
+    const [title, content] = await db("post")
+      .where({ id })
+      .select("title", "content")
+
+    return [title, content]
+  }
 }
 
 export default new PostDAO()

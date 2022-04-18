@@ -8,6 +8,20 @@ class PostController {
       res.status(201).json(id)
     } catch (err) {
       console.error(err)
+      res.status(500).json("Something went wrong with the POST-request")
+    }
+  }
+
+  async getPost(req: Request, res: Response) {
+    try {
+      const [title, content] = await postService.getPost(req.params.id)
+      res.status(200).json({
+        title,
+        content
+      })
+    } catch (err) {
+      console.error(err)
+      res.status(500).json("Something went wrong with the GET-request")
     }
   }
 }

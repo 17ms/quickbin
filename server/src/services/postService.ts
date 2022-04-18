@@ -6,6 +6,10 @@ class PostService {
     const { title, content } = postDTO
     return await postDAO.createPost(title, content)
   }
+
+  async getPost(id: string): Promise<[string, string]> {
+    return await postDAO.getPost(id)
+  }
 }
 
 export default new PostService()

@@ -1,12 +1,15 @@
 import express from "express"
+import { Validator } from "express-json-validator-middleware"
 import postController from "../controllers/postController"
+import postSchema from "../schemas/postSchema"
+import validationErrorMiddleware from "../middlewares/validationErrorMiddleware"
 
-// GET "/" & POST paste
+export const router = express.Router()
 
-const router = express.Router()
+const { validate } = new Validator({})
 
-router.use(express.json())
+// TODO => create GET for "/"
 
-router.post("/", postController.createPost)
+router.post("/", validate({ body: postSchema }), postController.createPost)
 
-export default router
+router.use(validationErrorMiddleware)
