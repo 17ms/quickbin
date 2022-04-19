@@ -4,7 +4,7 @@ import postController from "../controllers/postController"
 import postSchema from "../schemas/postSchema"
 import validationErrorMiddleware from "../middlewares/validationErrorMiddleware"
 
-export const router = express.Router()
+const router = express.Router()
 
 const { validate } = new Validator({})
 
@@ -13,3 +13,5 @@ const { validate } = new Validator({})
 router.post("/", validate({ body: postSchema }), postController.createPost)
 
 router.use(validationErrorMiddleware)
+
+export default router

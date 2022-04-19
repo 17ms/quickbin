@@ -11,3 +11,5 @@ lib-cov
 server/dist/**/*
 server/yarn.lock
 server/node_modules
+server/.env
+
