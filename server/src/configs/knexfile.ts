@@ -1,7 +1,5 @@
 import type { Knex } from "knex"
-import * as dotenv from "dotenv"
-
-dotenv.config({ path: __dirname + "/.env" })
+import "dotenv/config"
 
 // TODO: remove hardcoded values
 const config: { [key: string]: Knex.Config } = {

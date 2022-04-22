@@ -1,5 +1,6 @@
 import postDTO from "../models/postDTO"
 import postDAO from "../daos/postDAO"
+import ApiError from "../errors/apiError"
 
 class PostService {
   async createPost(postDTO: postDTO): Promise<string> {
@@ -8,7 +9,12 @@ class PostService {
   }
 
   async getPost(id: string): Promise<[string, string]> {
-    return await postDAO.getPost(id)
+    const post = await postDAO.getPost(id)
+    //console.log(typeof post[0] === "undefined")
+    if (typeof post[0] === "undefined") {
+      throw ApiError.notFound("The ID doesn't match any post.")
+    }
+    return post
   }
 }
 
