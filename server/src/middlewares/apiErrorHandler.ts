@@ -12,7 +12,6 @@ export function apiValidationErrorHandler(
     next(err)
   } else {
     res.status(400).send(err.validationErrors)
-    // LOG WITH WINSTON
     next()
   }
 }
@@ -27,7 +26,6 @@ export function apiGetErrorHandler(
     next(err)
   } else {
     res.status(err.code).send(err.msg)
-    // LOG WITH WINSTON
     next()
   }
 }

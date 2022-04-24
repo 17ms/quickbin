@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express"
 import postService from "../services/postService"
-import ApiError from "../errors/apiError"
 
 class PostController {
   async createPost(req: Request, res: Response, next: NextFunction) {
@@ -8,8 +7,7 @@ class PostController {
       const id = await postService.createPost(req.body)
       res.status(201).json(id)
     } catch (err) {
-      // LOG WITH WINSTON
-      next(ApiError.internal(`The server cannot process the request (${err}).`))
+      next(err)
     }
   }
 
@@ -21,7 +19,6 @@ class PostController {
         content
       })
     } catch (err) {
-      // LOG WITH WINSTON
       next(err)
     }
   }
