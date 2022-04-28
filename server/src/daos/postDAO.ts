@@ -1,17 +1,19 @@
 import db from "../configs/db"
-import { v4 as uuid } from "uuid"
+import idGenerator from "../utils/idGenerator"
 
 class PostDAO {
   async createPost(title: string, content: string): Promise<string> {
-    const [id] = await db("post")
+    const id = idGenerator()
+
+    const [postID] = await db("post")
       .insert({
-        id: uuid(),
+        id,
         title,
         content
       })
       .returning("id")
 
-    return id
+    return postID
   }
 
   async getPost(id: string): Promise<[string, string]> {
