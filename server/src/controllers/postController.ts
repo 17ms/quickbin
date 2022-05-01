@@ -13,11 +13,8 @@ class PostController {
 
   async getPost(req: Request, res: Response, next: NextFunction) {
     try {
-      const [title, content] = await postService.getPost(req.params.id)
-      res.status(200).json({
-        title,
-        content
-      })
+      const post = await postService.getPost(req.params.id)
+      res.status(200).json(post)
     } catch (err) {
       next(err)
     }

@@ -8,13 +8,16 @@ class PostService {
     return await postDAO.createPost(title, content)
   }
 
-  async getPost(id: string): Promise<[string, string]> {
-    const post = await postDAO.getPost(id)
-    //console.log(typeof post[0] === "undefined")
-    if (typeof post[0] === "undefined") {
+  async getPost(id: string): Promise<postDTO> {
+    const data = await postDAO.getPost(id)
+
+    if (data.length === 0) {
       throw ApiError.notFound("The ID doesn't match any post.")
+    } else if (data.length > 1) {
+      throw ApiError.internal("Duplicate ID detected, request aborted.")
     }
-    return post
+
+    return data[0] as postDTO
   }
 }
 
