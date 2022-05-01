@@ -1,27 +1,25 @@
 import React from "react"
-import { TextField } from "@material-ui/core"
-import { Button } from "@material-ui/core"
+import { TextField, Button } from "@material-ui/core"
 import api from "../utils/axios"
 
-export default function Post() {
-  const [state, setState] = React.useState({
-    title: null,
-    content: null
+export default function CreatePost() {
+  const [post, setPost] = React.useState({
+    title: "",
+    content: ""
   })
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
-    const value = event.target.value
-    setState({
-      ...state,
-      [event.target.name]: value
+    setPost({
+      ...post,
+      [event.target.name]: event.target.value
     })
   }
 
-  const handleCreatePost = () => {
-    if (state.content) {
+  const handleCreatePost = async () => {
+    if (post.content) {
       api
-        .post("/", state)
+        .post("/", post)
         .then((res) => {
           console.log(res)
           console.log(res.data)
@@ -40,10 +38,11 @@ export default function Post() {
         style={{ width: "60%" }}
         name="title"
         onChange={handleChange}
+        inputProps={{ maxLength: 120 }}
       />
       <TextField
-        id="multiline-text-input"
         label="Content"
+        id="multiline-text-input"
         variant="filled"
         style={{ width: "80%" }}
         name="content"

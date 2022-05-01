@@ -1,12 +1,14 @@
-import React from "react"
-import CreatePost from "./components/Post"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import CreatePost from "./components/CreatePost"
+import ViewPost from "./components/ViewPost"
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <CreatePost></CreatePost>
-      </div>
-    )
-  }
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CreatePost />} />
+        <Route path="/posts/:id" element={<ViewPost />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
