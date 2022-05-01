@@ -1,10 +1,12 @@
 import type { Knex } from "knex"
-import "dotenv/config"
+import dotenv from "dotenv"
+import path from "path"
 
-// TODO: remove hardcoded values
+dotenv.config({ path: path.join(__dirname, "../..", ".env") })
+
 const config: { [key: string]: Knex.Config } = {
   development: {
-    client: "pg",
+    client: process.env.DB_CLIENT,
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
@@ -20,7 +22,7 @@ const config: { [key: string]: Knex.Config } = {
     }
   },
   production: {
-    client: "pg",
+    client: process.env.DB_CLIENT,
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
