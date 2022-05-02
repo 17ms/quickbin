@@ -6,8 +6,8 @@ const router = express.Router()
 
 router.use(express.json())
 
-router.use(apiGetErrorHandler)
-
 router.get("/:id", postController.getPost)
+
+router.use(apiGetErrorHandler)
 
 export default router

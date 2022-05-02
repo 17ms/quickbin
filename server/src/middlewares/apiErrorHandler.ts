@@ -11,7 +11,7 @@ export function apiValidationErrorHandler(
   if (res.headersSent || !(err instanceof ValidationError)) {
     next(err)
   } else {
-    res.status(400).send(err.validationErrors)
+    res.status(400).json(err.validationErrors)
     next()
   }
 }
@@ -25,7 +25,7 @@ export function apiGetErrorHandler(
   if (res.headersSent || !(err instanceof ApiError)) {
     next(err)
   } else {
-    res.status(err.code).send(err.msg)
+    res.status(err.code).json(err.msg)
     next()
   }
 }
