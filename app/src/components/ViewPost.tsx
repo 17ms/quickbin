@@ -1,6 +1,6 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { TextField, Button } from "@material-ui/core"
-import api from "../utils/axios"
+import { getData } from "../utils/axios"
 import { useParams } from "react-router-dom"
 
 export default function ViewPost() {
@@ -10,15 +10,20 @@ export default function ViewPost() {
     content: ""
   })
 
+  const initialRender = useRef(true)
+
   useEffect(() => {
-    api
-      .get(`/posts/${id}`)
-      .then((res) => {
-        const data = res.data
-        console.log(res.data)
-        setPost(data)
-      })
-      .catch((err) => console.log(err))
+    if (initialRender.current) {
+      getData(id as string)
+        .then((res) => {
+          const data = res.data
+          console.log(res.data)
+          setPost(data)
+        })
+        .catch((err) => console.log(err))
+
+      initialRender.current = false
+    }
   }, [id])
 
   return (

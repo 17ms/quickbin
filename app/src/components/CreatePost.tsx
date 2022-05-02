@@ -1,6 +1,6 @@
 import React from "react"
 import { TextField, Button } from "@material-ui/core"
-import api from "../utils/axios"
+import { postData } from "../utils/axios"
 
 export default function CreatePost() {
   const [post, setPost] = React.useState({
@@ -18,8 +18,7 @@ export default function CreatePost() {
 
   const handleCreatePost = async () => {
     if (post.content) {
-      api
-        .post("/", post)
+      postData(post)
         .then((res) => {
           console.log(res)
           console.log(res.data)
