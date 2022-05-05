@@ -8,8 +8,6 @@ const router = express.Router()
 
 const { validate } = new Validator({})
 
-// TODO => create GET for "/"
-
 router.post("/", validate({ body: postSchema }), postController.createPost)
 
 router.use(apiValidationErrorHandler)
