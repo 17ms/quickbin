@@ -1,11 +1,12 @@
 import db from "../configs/db"
-import idGenerator from "../utils/idGenerator"
 import postDTO from "../models/postDTO"
 
 class PostDAO {
-  async createPost(title: string, content: string): Promise<string> {
-    const id = idGenerator()
-
+  async createPost(
+    title: string,
+    content: string,
+    id: string
+  ): Promise<string> {
     const [postID] = await db("post")
       .insert({
         id,
@@ -17,8 +18,8 @@ class PostDAO {
     return postID
   }
 
-  async getPost(id: string): Promise<postDTO[]> {
-    return await db("post").where({ id }).select("title", "content")
+  async getPost(id: string): Promise<postDTO> {
+    return await db("post").where({ id }).first().select("title", "content")
   }
 }
 
