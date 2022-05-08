@@ -7,7 +7,7 @@ class PostDAO {
     content: string,
     id: string
   ): Promise<string> {
-    const [postID] = await db("post")
+    const [postID] = await db("posts")
       .insert({
         id,
         title,
@@ -19,7 +19,7 @@ class PostDAO {
   }
 
   async getPost(id: string): Promise<postDTO> {
-    return await db("post").where({ id }).first().select("title", "content")
+    return await db("posts").where({ id }).first().select("title", "content")
   }
 }
 
