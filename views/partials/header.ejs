@@ -1,0 +1,21 @@
+<!-- views/partials/header.ejs -->
+<div class="navbar-container">
+  <nav class="navbar">
+    <a class="logo" href="/">QUICKBIN</a>
+    <ul class="navlinks">
+      <% if (user) { %>
+      <li><a href="/auth/user">User</a></li>
+      <li><a href="#">Logout</a></li>
+      <% } else { %>
+      <li><a href="/auth/login">Login</a></li>
+      <li><a href="/auth/signup">Signup</a></li>
+      <% } %>
+    </ul>
+  </nav>
+</div>
+
+<div class="main">
+  <% if(typeof message !== 'undefined' && message) { %>
+  <div class="message"></div>
+  <% } %>
+</div>

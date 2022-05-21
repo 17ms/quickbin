@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <div>
+      <p>Hello, <%= user ? user.username : "Anonymous" %>!</p>
+    </div>
+    <br />
+    <div class="post-container">
+      <form method="post" action="/create">
+        <input type="text" id="title" name="title" placeholder="Title" />
+        <textarea name="content" id="content" placeholder="Content"></textarea>
+        <br />
+        <input type="submit" value="Create" class="submit-button" />
+      </form>
+    </div>
+    <%- include("../partials/footer") %>
+  </body>
+</html>

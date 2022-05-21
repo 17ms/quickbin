@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <div>
+      <p>id=<%= id %></p>
+      <p>owner=<%= owner %></p>
+      <p>date=<%= date %></p>
+    </div>
+    <br />
+    <div class="post-container">
+      <form>
+        <input type="text" id="title" name="title" placeholder="No title" <%=
+        !title ? "" : "value="+title %> readonly />
+        <textarea name="content" id="content" readonly><%= content %></textarea>
+      </form>
+    </div>
+    <%- include("../partials/footer") %>
+  </body>
+</html>

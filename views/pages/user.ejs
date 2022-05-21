@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <div class="userdata-spacing">
+      <div class="userdata-container">
+        <table border="1" cellpadding="5" cellspacing="5">
+          <tr>
+            <th>UID</th>
+            <td><%= user.uid %></td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td><%= user.username %></td>
+          </tr>
+          <tr>
+            <th>Creation</th>
+            <td><%= user.createdAt %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <%- include("../partials/footer") %>
+  </body>
+</html>

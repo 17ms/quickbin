@@ -8,11 +8,8 @@ lib-cov
 *.gz
 *.swp
 
-server/dist/**/*
-server/yarn.lock
-server/node_modules
-server/.env
+dist/**/*
+yarn.lock
+node_modules
+.env
 
-client/dist/**/*
-client/yarn.lock
-client/node_modules

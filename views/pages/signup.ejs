@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <div class="auth-container">
+      <form method="post" action="/auth/signup">
+        <input type="text" id="email" name="email" placeholder="Email" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input
+          type="password"
+          id="confirmation"
+          name="confirmation"
+          placeholder="Password confirmation"
+        />
+        <br />
+        <input type="submit" value="Sign Up" class="submit-button" />
+      </form>
+    </div>
+    <%- include("../partials/footer") %>
+  </body>
+</html>
