@@ -3,6 +3,7 @@ import passportLocal from "passport-local"
 import bcrypt from "bcrypt"
 import db from "./database"
 import { randomUUID } from "crypto"
+import signupData from "../types/signupData"
 
 const isValidEmail = (email: string) => {
   return email
@@ -60,14 +61,16 @@ passport.use(
                 })
                 .returning(["uid", "email", "created_at"])
                 .then((data) => {
-                  const [userUid, userEmail, userCreatedAt] = data
+                  const userData: signupData = data[0] as signupData
+                  console.log(userData)
+
                   console.log(
-                    `User [${userEmail}] signed up and logged in successfully`
+                    `User [${userData.email}] signed up and logged in successfully`
                   )
                   return done(null, {
-                    uid: userUid,
-                    username: email,
-                    createdAt: userCreatedAt
+                    uid: userData.uid,
+                    username: userData.email,
+                    createdAt: userData.created_at
                   })
                 })
                 .catch((err) => {
