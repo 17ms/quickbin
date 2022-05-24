@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../partials/head") %>
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <div class="auth-container">
+      <form method="post" action="/auth/update">
+        <input
+          type="password"
+          id="oldPassword"
+          name="oldPassword"
+          placeholder="Old Password"
+        />
+        <input
+          type="password"
+          id="newPassword"
+          name="newPassword"
+          placeholder="New Password"
+        />
+        <input
+          type="password"
+          id="newConfirmation"
+          name="newConfirmation"
+          placeholder="New Password Confirmation"
+        />
+        <br />
+        <input type="submit" value="Update" class="submit-button" />
+      </form>
+    </div>
+    <%- include("../partials/footer") %>
+  </body>
+</html>

@@ -3,11 +3,12 @@ import passport from "passport"
 import {
   handleSignup,
   handleLogin,
-  //handleLogout,
-  //getUserInfo,
+  handleLogout,
   handleSignupRender,
   handleLoginRender,
-  handleUserdataRender
+  handleUserdataRender,
+  handlePasswordUpdateRender,
+  handlePasswordUpdate
 } from "../controllers/authController"
 
 const router = express.Router()
@@ -38,8 +39,20 @@ router
     })
   )
 
-router.route("/logout").get()
+router.route("/logout").post(handleLogout)
 
 router.route("/user").get(handleUserdataRender)
+
+router
+  .route("/update")
+  .get(handlePasswordUpdateRender)
+  .post(
+    handlePasswordUpdate,
+    passport.authenticate("update", {
+      successRedirect: "/",
+      failureRedirect: "/auth/update",
+      failureFlash: true
+    })
+  )
 
 export default router

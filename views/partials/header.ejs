@@ -5,7 +5,6 @@
     <ul class="navlinks">
       <% if (user) { %>
       <li><a href="/auth/user">User</a></li>
-      <li><a href="#">Logout</a></li>
       <% } else { %>
       <li><a href="/auth/login">Login</a></li>
       <li><a href="/auth/signup">Signup</a></li>
@@ -15,7 +14,7 @@
 </div>
 
 <div class="main">
-  <% if(typeof message !== 'undefined' && message) { %>
+  <% if (typeof message !== 'undefined' && message) { %>
   <div class="message"></div>
   <% } %>
 </div>

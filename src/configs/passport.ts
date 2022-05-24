@@ -59,10 +59,9 @@ passport.use(
                   email,
                   hash
                 })
-                .returning(["uid", "email", "created_at"])
+                .returning(["uid", "email", "created_at", "updated_at"])
                 .then((data) => {
                   const userData: signupData = data[0] as signupData
-                  console.log(userData)
 
                   console.log(
                     `User [${userData.email}] signed up and logged in successfully`
@@ -70,7 +69,8 @@ passport.use(
                   return done(null, {
                     uid: userData.uid,
                     username: userData.email,
-                    createdAt: userData.created_at
+                    createdAt: userData.created_at,
+                    editedAt: userData.updated_at
                   })
                 })
                 .catch((err) => {
@@ -135,7 +135,8 @@ passport.use(
                   return done(null, {
                     uid: user.uid,
                     username: user.email,
-                    createdAt: user.created_at
+                    createdAt: user.created_at,
+                    editedAt: user.updated_at
                   })
                 } else {
                   return done(
@@ -158,4 +159,71 @@ passport.use(
   )
 )
 
-// TODO: add update password -strategy (passport)
+passport.use(
+  "update",
+  new LocalStrategy(
+    {
+      usernameField: "oldPassword",
+      passwordField: "newPassword",
+      passReqToCallback: true
+    },
+    (req, oldPassword, newPassword, done) => {
+      const updatePassword = async () => {
+        const salt = await bcrypt.genSalt()
+        const newHash = await bcrypt.hash(newPassword, salt)
+
+        await db("users")
+          .where({ email: req.user?.username })
+          .first()
+          .then((user) => {
+            bcrypt.compare(oldPassword, user.hash, async (err, res) => {
+              if (err) {
+                console.log("Error when validating password")
+                return done(err)
+              }
+              if (res) {
+                await db("users")
+                  .where({ email: user.email })
+                  .update({ hash: newHash, updated_at: db.fn.now() })
+                  .catch((err) => {
+                    console.log(`ERROR @update-strategy: ${err}`)
+                    throw err
+                  })
+
+                console.log(
+                  `User [${user.email}] updated their password successfully`
+                )
+                return done(null, {
+                  uid: user.uid,
+                  username: user.email,
+                  createdAt: user.created_at,
+                  editedAt: user.updated_at
+                })
+              } else {
+                return done(
+                  null,
+                  false,
+                  req.flash("message", "Incorrect password")
+                )
+              }
+            })
+          })
+
+        if (req.user) {
+        }
+      }
+
+      if (!isValidPassword(newPassword)) {
+        return done(
+          null,
+          false,
+          req.flash("message", "Please provide valid new password")
+        )
+      } else {
+        updatePassword()
+      }
+    }
+  )
+)
+
+// TODO: add automatic removal of posts older than 1 week

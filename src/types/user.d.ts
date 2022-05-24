@@ -6,6 +6,8 @@ declare global {
       uid: string
       username: string
       hash: string
+      created: string
+      edited: string
     }
   }
 }
