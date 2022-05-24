@@ -8,6 +8,7 @@ import flash from "connect-flash"
 import passport from "passport"
 import "./src/configs/passport"
 import "./src/utils/parseEnv"
+import "./src/utils/cronDelete"
 
 const app = express()
 const port = process.env.PORT || 3000
