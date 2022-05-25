@@ -38,7 +38,7 @@ export const handleCreatePost = async (
 
   logger.log("info", `Post [${id}] created successfully`)
   req.flash("message", `Post created successfully: ${id}`)
-  res.redirect("/") // Avoid resend-form problems when reloading page
+  res.redirect(`/posts/${id}`) // Avoid resend-form problems when reloading page
 }
 
 export const handleIndexRender = (
