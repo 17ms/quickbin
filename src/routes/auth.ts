@@ -13,8 +13,6 @@ import {
 
 const router = express.Router()
 
-// TODO: validation for POST
-
 router
   .route("/signup")
   .get(handleSignupRender)

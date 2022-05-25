@@ -3,6 +3,7 @@ import assignLocals from "./src/middlewares/assignLocals"
 import indexRouter from "./src/routes/index"
 import postsRouter from "./src/routes/posts"
 import authRouter from "./src/routes/auth"
+import logger from "./src/utils/winston"
 import express from "express"
 import flash from "connect-flash"
 import passport from "passport"
@@ -27,8 +28,6 @@ app.use("/", indexRouter)
 app.use("/posts", postsRouter)
 app.use("/auth", authRouter)
 
-// TODO: add proper logging
-
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+  logger.log("info", `Server listening on port ${port}`)
 })
