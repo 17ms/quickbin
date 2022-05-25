@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express"
+import logger from "../utils/winston"
 
 export const handleSignup = (
   req: Request,
@@ -48,7 +49,7 @@ export const handleLogout = (
     req.flash("message", "You must be logged in to log out")
     res.redirect("/auth/login")
   } else {
-    console.log(`User [${req.user.username}] logged out successfully`)
+    logger.log("info", `User [${req.user.username}] logged out successfully`)
     req.logout()
     req.flash("message", "Successfully logged out")
     res.redirect("/")

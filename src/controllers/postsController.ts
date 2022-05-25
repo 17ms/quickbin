@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import db from "../configs/database"
+import logger from "../utils/winston"
 
 export const handlePostRender = async (req: Request, res: Response) => {
   const post = await db("posts")
@@ -7,7 +8,7 @@ export const handlePostRender = async (req: Request, res: Response) => {
     .first()
     .select("id", "title", "content", "owner", "created_at")
     .catch((err) => {
-      console.log(err)
+      logger.log("error", err)
       throw err
     })
 

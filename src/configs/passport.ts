@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 import db from "./database"
 import { randomUUID } from "crypto"
 import signupData from "../types/signupData"
+import logger from "../utils/winston"
 
 const isValidEmail = (email: string) => {
   return email
@@ -63,7 +64,8 @@ passport.use(
                 .then((data) => {
                   const userData: signupData = data[0] as signupData
 
-                  console.log(
+                  logger.log(
+                    "info",
                     `User [${userData.email}] signed up and logged in successfully`
                   )
                   return done(null, {
@@ -74,13 +76,13 @@ passport.use(
                   })
                 })
                 .catch((err) => {
-                  console.log(`ERROR @signup-strategy: ${err}`)
+                  logger.log("error", `ERROR @signup-strategy: ${err}`)
                   throw err
                 })
             }
           })
           .catch((err) => {
-            console.log(`ERROR @signup-strategy: ${err}`)
+            logger.log("error", `ERROR @signup-strategy: ${err}`)
             throw err
           })
       }
@@ -127,11 +129,14 @@ passport.use(
             } else {
               bcrypt.compare(password, user.hash, (err, res) => {
                 if (err) {
-                  console.log("Error when validating password")
+                  logger.log("error", "Error when validating password")
                   return done(err)
                 }
                 if (res) {
-                  console.log(`User [${user.email}] logged in successfully`)
+                  logger.log(
+                    "info",
+                    `User [${user.email}] logged in successfully`
+                  )
                   return done(null, {
                     uid: user.uid,
                     username: user.email,
@@ -149,7 +154,7 @@ passport.use(
             }
           })
           .catch((err) => {
-            console.log(`ERROR @login-strategy: ${err}`)
+            logger.log("error", `ERROR @login-strategy: ${err}`)
             throw err
           })
       }
@@ -178,7 +183,7 @@ passport.use(
           .then((user) => {
             bcrypt.compare(oldPassword, user.hash, async (err, res) => {
               if (err) {
-                console.log("Error when validating password")
+                logger.log("error", "Error when validating password")
                 return done(err)
               }
               if (res) {
@@ -186,11 +191,12 @@ passport.use(
                   .where({ email: user.email })
                   .update({ hash: newHash, updated_at: db.fn.now() })
                   .catch((err) => {
-                    console.log(`ERROR @update-strategy: ${err}`)
+                    logger.log("error", `ERROR @update-strategy: ${err}`)
                     throw err
                   })
 
-                console.log(
+                logger.log(
+                  "info",
                   `User [${user.email}] updated their password successfully`
                 )
                 return done(null, {
@@ -225,5 +231,3 @@ passport.use(
     }
   )
 )
-
-// TODO: add automatic removal of posts older than 1 week

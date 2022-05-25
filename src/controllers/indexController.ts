@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import idGenerator from "../utils/idGenerator"
 import db from "../configs/database"
+import logger from "../utils/winston"
 
 export const handleCreatePost = async (
   req: Request,
@@ -19,7 +20,7 @@ export const handleCreatePost = async (
         owner: req.user.username
       })
       .catch((err) => {
-        console.log(err)
+        logger.log("error", err)
         throw err
       })
   } else {
@@ -30,12 +31,12 @@ export const handleCreatePost = async (
         content: req.body.content
       })
       .catch((err) => {
-        console.log(err)
+        logger.log("error", err)
         throw err
       })
   }
 
-  console.log(`Post [${id}] created successfully`)
+  logger.log("info", `Post [${id}] created successfully`)
   req.flash("message", `Post created successfully: ${id}`)
   res.redirect("/") // Avoid resend-form problems when reloading page
 }
