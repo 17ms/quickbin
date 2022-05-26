@@ -187,9 +187,10 @@ passport.use(
                 return done(err)
               }
               if (res) {
-                await db("users")
+                const updatedDataArr = await db("users")
                   .where({ email: user.email })
                   .update({ hash: newHash, updated_at: db.fn.now() })
+                  .returning("updated_at")
                   .catch((err) => {
                     logger.log("error", `ERROR @update-strategy: ${err}`)
                     throw err
@@ -203,7 +204,7 @@ passport.use(
                   uid: user.uid,
                   username: user.email,
                   createdAt: user.created_at,
-                  editedAt: user.updated_at
+                  editedAt: updatedDataArr[0].updated_at
                 })
               } else {
                 return done(
