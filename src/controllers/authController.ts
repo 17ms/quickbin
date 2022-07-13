@@ -43,16 +43,21 @@ export const handleLogin = (
 export const handleLogout = (
   req: Request,
   res: Response,
-  _next: NextFunction
+  next: NextFunction
 ) => {
   if (!req.isAuthenticated()) {
     req.flash("message", "You must be logged in to log out")
     res.redirect("/auth/login")
   } else {
     logger.log("info", `User [${req.user.username}] logged out successfully`)
-    req.logout()
-    req.flash("message", "Successfully logged out")
-    res.redirect("/")
+    req.logout((err) => {
+      if (err) {
+        next(err)
+      } else {
+        req.flash("message", "Successfully logged out")
+        res.redirect("/")
+      }
+    })
   }
 }
 
@@ -93,7 +98,7 @@ export const handleSignupRender = (
   } else {
     res.render("pages/signup", {
       user: req.user,
-      message: res.locals.message
+      message: String(res.locals.message)
     })
   }
 }
@@ -109,7 +114,7 @@ export const handleLoginRender = (
   } else {
     res.render("pages/login", {
       user: req.user,
-      message: res.locals.message
+      message: String(res.locals.message)
     })
   }
 }
@@ -125,7 +130,7 @@ export const handleUserdataRender = (
   } else {
     res.render("pages/user", {
       user: req.user,
-      message: res.locals.message
+      message: String(res.locals.message)
     })
   }
 }
@@ -141,7 +146,7 @@ export const handlePasswordUpdateRender = (
   } else {
     res.render("pages/update", {
       user: req.user,
-      message: res.locals.message
+      message: String(res.locals.message)
     })
   }
 }
