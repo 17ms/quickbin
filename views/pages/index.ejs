@@ -6,7 +6,11 @@
   <body>
     <%- include("../partials/header") %>
     <div>
-      <p>Hello, <%= user ? user.username : "Anonymous" %>!</p>
+      <% if (message) { %>
+        <p><%= message %></p>
+      <% } else { %>
+        <p>Hello <%= user ? user.username : "Anonymous" %>!</p>
+      <% } %>
     </div>
     <br />
     <div class="post-container">

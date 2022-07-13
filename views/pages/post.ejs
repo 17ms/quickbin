@@ -6,9 +6,11 @@
   <body>
     <%- include("../partials/header") %>
     <div>
-      <p>id=<%= id %></p>
-      <p>owner=<%= owner %></p>
-      <p>date=<%= date %></p>
+      <% if (message) { %>
+        <p><%= message %></p>
+      <% } %>
+      <p>Owner: <%= owner %>, ID: <%= id %></p>
+      <p><%= date %></p>
     </div>
     <br />
     <div class="post-container">

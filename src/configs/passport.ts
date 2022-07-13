@@ -76,13 +76,13 @@ passport.use(
                   })
                 })
                 .catch((err) => {
-                  logger.log("error", `ERROR @signup-strategy: ${err}`)
+                  logger.log("message", `ERROR @signup-strategy: ${err}`)
                   throw err
                 })
             }
           })
           .catch((err) => {
-            logger.log("error", `ERROR @signup-strategy: ${err}`)
+            logger.log("message", `ERROR @signup-strategy: ${err}`)
             throw err
           })
       }
@@ -129,7 +129,7 @@ passport.use(
             } else {
               bcrypt.compare(password, user.hash, (err, res) => {
                 if (err) {
-                  logger.log("error", "Error when validating password")
+                  logger.log("message", "Error when validating password")
                   return done(err)
                 }
                 if (res) {
@@ -154,7 +154,7 @@ passport.use(
             }
           })
           .catch((err) => {
-            logger.log("error", `ERROR @login-strategy: ${err}`)
+            logger.log("message", `ERROR @login-strategy: ${err}`)
             throw err
           })
       }
@@ -183,7 +183,7 @@ passport.use(
           .then((user) => {
             bcrypt.compare(oldPassword, user.hash, async (err, res) => {
               if (err) {
-                logger.log("error", "Error when validating password")
+                logger.log("message", "Error when validating password")
                 return done(err)
               }
               if (res) {
@@ -192,7 +192,7 @@ passport.use(
                   .update({ hash: newHash, updated_at: db.fn.now() })
                   .returning("updated_at")
                   .catch((err) => {
-                    logger.log("error", `ERROR @update-strategy: ${err}`)
+                    logger.log("message", `ERROR @update-strategy: ${err}`)
                     throw err
                   })
 

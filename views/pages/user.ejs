@@ -5,6 +5,11 @@
   </head>
   <body>
     <%- include("../partials/header") %>
+    <div>
+      <% if (message) { %>
+        <p><%= message %></p>
+      <% } %>
+    </div>
     <div class="another-userdata-spacing-container">
       <div class="userdata-spacing">
         <div class="userdata-container">

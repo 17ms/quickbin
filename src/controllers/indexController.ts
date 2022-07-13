@@ -48,6 +48,6 @@ export const handleIndexRender = (
 ) => {
   res.render("pages/index", {
     user: req.user,
-    message: res.locals.message
+    message: String(res.locals.message)
   })
 }

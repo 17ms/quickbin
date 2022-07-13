@@ -5,6 +5,11 @@
   </head>
   <body>
     <%- include("../partials/header") %>
+    <div>
+      <% if (message) { %>
+        <p><%= message %></p>
+      <% } %>
+    </div>
     <div class="auth-container">
       <form method="post" action="/auth/login">
         <input type="text" id="email" name="email" placeholder="Email" />
