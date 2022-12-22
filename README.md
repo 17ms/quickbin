@@ -1,32 +1,27 @@
-# Quickbin - Minimalistic clone of Pastebin
+# Quickbin
 
-Simple web-application with user authentication. Made as a practice project to learn about creating and running a Node.js + Express web-application backend.
+Pastebin clone running a Node.js + Express backend with a basic HTML + CSS frontend.
 
 ## Getting started
 
-If you're using a UNIX-based system (and have npm/yarn & postgres installed), feel free to use the included `setup.sh`, which will setup the postgres database, create a template for .env and run the migrations:
-
-- Note that the script uses `whoami` for DB_USER and you should not use it if you don't have or want the default configuration for your database.
+Via included shellscript `setup_dev.sh` (creates a new postgres database, runs the migrations from `./src/configs/migrations` and sets up most of `.env`):
 
 ```shell
 chmod +x setup.sh
 ./setup.sh <name-for-the-database>
 ```
 
-Or without the script by filling out the information inside .env yourself before running the migrations:
+Manually:
 
 ```shell
-createdb <name-for-the-database>
+createdb quickbin
 yarn install
-touch .env && printf "DB_USER=\nDB_PASSWORD=\nDB_NAME=" > .env
-
-# Fill .env before this step
-npx knex migrate:latest --knexfile src/configs/knexfile.ts
+cp .env.template .env # manually fill in the details
 ```
 
-After finishing the setup you can start the server by running `tsc && yarn start`.
+The server can be started with `tsc && yarn start` after the setup is finished.
 
-## Built with
+## Stack
 
 - [Express](https://expressjs.com/)
 - [PostgreSQL](https://www.postgresql.org/)
