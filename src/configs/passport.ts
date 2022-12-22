@@ -15,7 +15,7 @@ const isValidEmail = (email: string) => {
 }
 
 const isValidPassword = (password: string) => {
-  /* Require min. 8 char password with at least 
+  /* Requires min. 8 chars containing at least 
   a symbol, upper and lower case letters and a number. */
   return password.match(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/)
 }

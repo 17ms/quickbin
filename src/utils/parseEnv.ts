@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 import path from "path"
 
 /* Additional check for running migrations,
- as the working directory changes from dist/ to src/configs/ */
+as the working directory changes from dist/ to src/configs/ */
 
 const workDir = process.cwd().split("/")
 
