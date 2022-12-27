@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Minimalistic clone of Pastebin",
   "main": "dist/app.js",
-  "repository": "https://github.com/einisto/quickbin/",
+  "repository": "https://github.com/17ms/quickbin/",
   "author": "Arttu Einistö",
   "license": "GPL-3.0-or-later",
   "scripts": {
