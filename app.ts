@@ -7,6 +7,7 @@ import logger from "./src/utils/winston"
 import express from "express"
 import flash from "connect-flash"
 import passport from "passport"
+import helmet from "helmet"
 import "./src/configs/passport"
 import "./src/utils/parseEnv"
 import "./src/utils/cronDelete"
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(helmet())
 
 app.use(assignLocals)
 
