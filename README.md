@@ -4,7 +4,7 @@ Pastebin clone running a Node.js + Express backend with a basic HTML + CSS front
 
 ## Getting started
 
-Via included shellscript `setup_dev.sh` (creates a new postgres database, runs the migrations from `./src/configs/migrations` and sets up most of `.env`):
+Via included shellscript `setup_dev.sh` (creates a new postgres database, runs the migrations from `./src/configs/migrations`, creates a temporary SSL certificate for HTTPS and sets up **most of** `.env`):
 
 ```shell
 chmod +x setup.sh

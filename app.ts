@@ -1,4 +1,5 @@
 import assignLocals from "./src/middlewares/assignLocals"
+import rateLimitConfig from "./src/configs/rateLimit"
 import session from "./src/configs/session"
 import indexRouter from "./src/routes/index"
 import postsRouter from "./src/routes/posts"
@@ -30,13 +31,12 @@ app.use(helmet())
 
 app.use(assignLocals)
 
+app.use("/posts", rateLimitConfig)
+app.use("/auth", rateLimitConfig)
+
 app.use("/", indexRouter)
 app.use("/posts", postsRouter)
 app.use("/auth", authRouter)
-
-//app.listen(port, () => {
-//  logger.log("info", `Server listening on port ${port}`)
-//})
 
 https
   .createServer({ key: privKey, cert: certificate }, app)
